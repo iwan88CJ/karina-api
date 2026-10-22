@@ -1,0 +1,14 @@
+services:
+  api:
+    image: ${API_IMAGE:?Set API_IMAGE to the GHCR image address}
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${API_PORT:-3000}:3000"
+    environment:
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+    volumes:
+      - api-data:/app/data
+
+volumes:
+  api-data:
